@@ -1,0 +1,1029 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>岗位信息</title>
+     <style>
+#userMenu ul {
+        list-style-type: none; /* 去除列表样式 */
+        margin: 0;
+        padding: 0;
+    }
+
+    #userMenu ul li {
+        padding: 5px 0; /* 设置列表项的上下内边距 */
+    }
+
+    #userMenu ul li a {
+        text-decoration: none; /* 去除链接的下划线 */
+        color: #333; /* 设置链接文本颜色 */
+    }
+
+    #userMenu ul li a:hover {
+        background-color: #f0f0f0; /* 设置鼠标悬停时的背景色 */
+    }
+        #searchForm {
+    background-color: #f2f2f2; /* 浅灰色 */
+    /* 或者 */
+    background-color: #e9ecef; /* 浅灰蓝色 */
+    /* 或者 */
+    background-color: #f8f9fa; /* 淡蓝灰色 */
+}
+
+    .small-image {
+        width: 40px; /* 设置图片宽度 */
+        height: auto; /* 自动调整高度 */
+        cursor: pointer; /* 添加鼠标指针 */
+    }
+
+        #searchForm {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f9f9f9; /* 你想要的背景颜色 */
+    z-index: 999; /* 确保固定在顶部 */
+    padding: 10px 20px; /* 调整内边距 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+}
+
+#jobTable {
+    margin-top: 60px; /* 调整表格位置，防止被固定在顶部的搜索条遮挡 */
+}
+        #searchForm {
+    background-color: #f2f2f2; /* 浅灰色 */
+    /* 或者 */
+    background-color: #e9ecef; /* 浅灰蓝色 */
+    /* 或者 */
+    background-color: #f8f9fa; /* 淡蓝灰色 */
+}
+
+        #searchForm {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f9f9f9; /* 你想要的背景颜色 */
+    z-index: 999; /* 确保固定在顶部 */
+    padding: 10px 20px; /* 调整内边距 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+}
+
+#jobTable {
+    margin-top: 60px; /* 调整表格位置，防止被固定在顶部的搜索条遮挡 */
+}
+
+/* 添加一些阴影效果和圆角 */
+#searchButton,
+#shenqing {
+    padding: 8px 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#searchButton {
+    background-color: #007bff;
+    color: white;
+}
+
+#searchButton:hover {
+    background-color: #0056b3;
+}
+
+#shenqing {
+    padding: 8px 15px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 3px;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(40, 167, 69, 0.2);
+}
+#delete {
+    padding: 8px 15px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 3px;
+    background-color: #ff0000;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(40, 167, 69, 0.2);
+}
+#shenqing:hover {
+    background-color: #218838;
+}
+#delete:hover {
+    background-color: #B22222;
+}
+
+/* 为表格添加一些样式 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px 16px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* 样式化表单元素 */
+form {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+select, input[type="text"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    width: 150px;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+        a{
+            text-decoration: none;
+        color: black; /* 设置为你想要的颜色 */
+        }
+        #searchButton,
+#shenqing {
+    padding: 8px 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#searchButton {
+    background-color: #007bff; /* 蓝色 */
+    color: white;
+}
+
+#searchButton:hover {
+    background-color: #0056b3; /* 深蓝色 */
+}
+
+#shenqing {
+    /*background-color: #28a745; !* 绿色 *!*/
+    /*color: white;*/
+    padding: 8px 15px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 3px;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#shenqing:hover {
+    background-color: #218838; /* 深绿色 */
+}
+.green {
+    background-color: green;
+}
+
+.red {
+    background-color: red;
+}
+
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        select, input[type="text"] {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 8px 20px;
+            border-radius: 5px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        select, input[type="text"] {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 8px 20px;
+            border-radius: 5px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        /* 添加样式来设计信息框 */
+        .info-box {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #f2f2f2;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .down_label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+
+        /* 隐藏表单 */
+        .hidden {
+            display: none;
+        }
+            .number-input {
+        width: 150px; /* 设置输入框宽度 */
+                height: 25px;
+        margin-bottom: 10px; /* 设置底部外边距，以便与下一个元素分隔开 */
+    }
+    </style>
+        <script>
+    var csrfToken = "{{ csrf_token }}";
+</script>
+
+</head>
+<body>
+
+    <form id="searchForm">
+        <label for="jobCategory">选择岗位类别:</label>
+        <select id="jobCategory" name="jobCategory">
+            <option value="all">全部</option>
+            <option value="finance">金融</option>
+            <option value="marketing">市场营销</option>
+            <option value="medicine">医疗</option>
+            <option value="petrol">石油</option>
+            <option value="government">政府</option>
+            <option value="creature">生物</option>
+            <option value="computer">计算机</option>
+
+        </select>
+        <label for="province">所在省份:</label>
+        <select id="province" name="province">
+
+            <option value="all">全部</option>
+        </select>
+        <label for="city">所在城市:</label>
+        <select id="city" name="city">
+            <option value="all">全部</option>
+
+        </select>
+        <label for="district">所在区域:</label>
+        <select id="district" name="district">
+            <option value="all">全部</option>
+
+        </select>
+        <label for="searchKeyword">搜索关键词:</label>
+        <input type="text" id="searchKeyword" name="searchKeyword">
+        <input type="button" value="搜索" id="searchButton" onclick="performSearch()">
+        <!-- 图片按钮 -->
+        <img src="{% static 'img/user.jpg' %}" alt="User Menu" id="userMenuButton" class="small-image" onclick="toggleUserMenu()" style="position: absolute; right: 50px; top: 10px;">
+
+        <!-- 下拉列表 -->
+        <div id="userMenu" style="display: none; position: absolute; top: 50px; right: 10px; background-color: #fff; border: 1px solid #ccc; padding: 5px; width: 100px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+        <ul>
+            <li><a href="../ue/">个人信息</a></li>
+            <li><a href="../">退出</a></li>
+        </ul>
+    </div>
+    </form>
+
+    <!-- 信息框 -->
+    <div class="info-box">
+        提供 <span id="jobCount">{{ jobnum }}</span> 个岗位
+    </div>
+
+    <table id="jobTable">
+        <thead>
+            <tr>
+                <th>岗位</th>
+                <th>特征</th>
+                <th>城市</th>
+                <th>区域</th>
+                <th>工作经历</th>
+                <th>学历</th>
+                <th>企业</th>
+                <th>最高薪资</th>
+                <th>最低薪资</th>
+                <th>HR</th>
+                <th>审核结果</th>
+                <th>操作</th>
+
+                <!-- 在这里添加更多的列 -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 这里将动态添加岗位信息的行 -->
+        </tbody>
+    </table>
+    <div class="container">
+    <h2>新增岗位</h2>
+    <!-- 添加一个按钮来显示表单 -->
+    <button type="button" onclick="showForm()" id="shenqing">新增岗位</button>
+
+    <!-- 表单部分 -->
+    <form id="addJobForm" class="hidden">
+        <label for="jobName" class="down_label">岗位名:</label>
+        <input type="text" id="jobName" name="jobName">
+
+        <label for="maxSalary" class="down_label">最高薪资:</label>
+        <input type="text" id="maxSalary" name="maxSalary">
+
+        <label for="minSalary" class="down_label">最低薪资:</label>
+        <input type="text" id="minSalary" name="minSalary">
+
+        <label for="tag2" class="down_label">标签:</label>
+        <input type="text" id="tag2" name="tag2">
+
+
+<label for="city2" class="down_label">工作城市:</label>
+<input type="text" id="city2" name="city2" list="city-options">
+<datalist id="city-options">
+    {% for city in cities %}
+        <option value="{{ city.cityname }}">
+    {% endfor %}
+    <!-- 其他选项 -->
+</datalist>
+
+
+        <label for="experience" class="down_label">工作经历需求（年数）:</label>
+<input type="number" id="experience" name="experience" class="number-input" min="0" step="1"> <!-- 添加了min和step属性 -->
+
+        <br>
+        <label for="education">最低学历需求:</label>
+    <br>
+        <select id="education">
+            <option value="junior">初中</option>
+            <option value="highschool">高中</option>
+            <option value="secondary">中专</option>
+            <option value="associate">大专</option>
+            <option value="bachelor" >本科</option>
+            <option value="master">硕士</option>
+            <option value="doctorate">博士</option>
+            <option value="none">无</option>
+        </select>
+
+        <label for="description" class="down_label">职位描述:</label>
+        <input type="text" id="description" name="description">
+
+        <label for="district2" class="down_label">市辖区:</label>
+        <input type="text" id="district2" name="district2">
+        <label for="HrId" class="down_label">HR号:</label>
+        <select id="HrId" name="HrId">
+
+            {% for hr in hrs %}
+                <option value="hrId1">{{ hr.hrname }} {{ hr.hrid }}</option>
+
+            {% endfor %}
+        </select>
+
+        <button type="button" onclick="addJob()" id="shenqing">确定</button>
+    </form>
+        <form id="updateJobForm" class="hidden">
+             <span id="closeUpdateForm" onclick="closeUpdateForm()" style="cursor: pointer; position: absolute; top: 5px; right: 5px;">&times;</span> <!-- 关闭按钮 -->
+        <label for="updateJobName" class="down_label">岗位名:</label>
+        <input type="text" id="updateJobName" name="updateJobName">
+
+        <label for="updateMaxSalary" class="down_label">最高薪资:</label>
+        <input type="text" id="updateMaxSalary" name="updateMaxSalary">
+
+        <label for="updateMinSalary" class="down_label">最低薪资:</label>
+        <input type="text" id="updateMinSalary" name="updateMinSalary">
+
+        <label for="updateTag" class="down_label">标签:</label>
+        <input type="text" id="updateTag" name="updateTag">
+
+
+        <label for="updateCity" class="down_label">工作城市:</label>
+        <input type="text" id="updateCity" name="updateCity" list="city-options">
+        <datalist id="city-options">
+            {% for city in cities %}
+                <option value="{{ city.cityname }}">
+            {% endfor %}
+            <!-- 其他选项 -->
+        </datalist>
+
+        <label for="updateExperience" class="down_label">工作经历需求（年数）:</label>
+<input type="number" id="updateExperience" name="experience" class="number-input" min="0" step="1"> <!-- 添加了min和step属性 -->
+
+
+                <br>
+        <label for="updateEducation">最低学历需求:</label>
+    <br>
+        <select id="updateEducation">
+            <option value="junior">初中</option>
+            <option value="highschool">高中</option>
+            <option value="secondary">中专</option>
+            <option value="associate">大专</option>
+            <option value="bachelor" >本科</option>
+            <option value="master">硕士</option>
+            <option value="doctorate">博士</option>
+            <option value="none">无</option>
+        </select>
+
+
+        <label for="updateDescription" class="down_label">职位描述:</label>
+        <input type="text" id="updateDescription" name="updateDescription">
+
+        <label for="updateDistrict" class="down_label">市辖区:</label>
+        <input type="text" id="updateDistrict" name="updateDistrict">
+
+
+        <label for="updateHrId" class="down_label">HR号:</label>
+        <select id="updateHrId" name="updateHrId">
+
+            {% for hr in hrs %}
+                <option value="hrId1">{{ hr.hrname }} {{ hr.hrid }}</option>
+
+            {% endfor %}
+        </select>
+        <button type="button" onclick="updateJob1()" id="shenqing">更新</button>
+    </form>
+
+</div>
+    <script>
+    class Location{
+        constructor(provincename,cityname,districtname) {
+            this.districtname = districtname;
+            this.cityname = cityname;
+            this.provincename = provincename;
+        }
+    }
+    class Job{
+        constructor(jobid,jobName,tag,cityname,districtname,experience_need,edu_need,enterprisename,max_salary,min_salary,job_hrname,ar,id) {
+            this.jobid=jobid
+            this.jobName=jobName
+            this.tag=tag
+            this.cityname=cityname
+            this.districtname=districtname
+            this.experience_need=experience_need
+            this.edu_need=edu_need
+            this.enterprisename=enterprisename
+            this.max_salary=max_salary
+            this.min_salary=min_salary
+            this.job_hrname=job_hrname
+            this.audit_result=ar
+            this.job_hrid=id
+        }
+    }
+    const jobData=[];
+        {% for job in jobs %}
+            jobData.push(new Job('{{ job.jobid }}','{{ job.jobname }}','{{ job.tag }}','{{ job.cityname }}','{{ job.districtname }}',
+            {{ job.experience_need }},'{{ job.edu_need }}','{{ job.enterprisename }}',{{ job.max_salary }},
+            {{ job.min_salary }},'{{ job.job_hrname }}','{{ job.auditresult }}','{{ job.job_hrid }}'))
+        {% endfor %}
+    function updateTable(data) {
+        var table=document.getElementById('jobTable')
+            while (table.rows.length > 1) {
+                table.deleteRow(1)
+            }
+            for(i=0;i<data.length;i++){
+      var row = `<tr>
+            <td><a href="/jobs/${data[i].jobid}/">${data[i].jobName}</a></td>
+            <td>${data[i].tag}</td>
+            <td>${data[i].cityname}</td>
+            <td>${data[i].districtname}</td>
+            <td>${data[i].experience_need}</td>
+            <td>${data[i].edu_need}</td>
+            <td>${data[i].enterprisename}</td>
+            <td>${data[i].max_salary}</td>
+            <td>${data[i].min_salary}</td>
+            <td><a href="/uh/${jobData[i].job_hrid}/">${jobData[i].job_hrname}</td>
+            <td class="${data[i].audit_result === '通过' ? 'green' : 'red'}">${data[i].audit_result}</td>
+            <td>
+                <button onclick="deleteJob(${i})" id="delete">删除</button>
+                <button onclick="updateJob(${i})" id="shenqing">更新</button>
+            </td>
+        </tr>`;
+                table.insertAdjacentHTML('beforeend', row); // 添加行到表格
+
+    }
+    }
+
+    var locations=[]
+        var province=[],city=[],district=[]
+        {% for province in district %}
+            province.push('{{ province.provincename }}')
+            locations.push(new Location('{{ province.provincename }}','{{ province.cityname }}','{{ province.districtname }}'))
+        {% endfor %}
+        province=new Set(province)
+        province=Array.from(province)
+        // 获取select元素
+
+        var selectElement = document.getElementById('province');
+        for (var i = 0; i < province.length; i++) {
+            var newOption = document.createElement('option');
+            newOption.text = province[i]
+            newOption.value = 'province'+String(i)
+            selectElement.appendChild(newOption);
+        }
+        selectElement.addEventListener('change',function (event) {
+            var selectedOption = selectElement.options[selectElement.selectedIndex].text
+            city=[]
+            for(var i=0;i<locations.length;i++){
+                if(locations[i].provincename==selectedOption){
+
+                    city.push(locations[i].cityname)
+                    city=new Set(city)
+                    city=Array.from(city)
+
+                    var cityElement = document.getElementById('city');
+                    while (cityElement.options.length >1) {
+                        cityElement.remove(1)
+                    }
+                    var districtElement = document.getElementById('district');
+                    while (districtElement.options.length >1) {
+                        districtElement.remove(1)
+                    }
+                    for (var j = 0; j < city.length; j++) {
+
+                        var newOption = document.createElement('option');
+                        newOption.text = city[j]
+                        newOption.value = 'city'+String(j)
+                        cityElement.appendChild(newOption);
+                    }
+                }
+            }
+
+        });
+
+        var cityElement = document.getElementById('city');
+
+        cityElement.addEventListener('change',function (event){
+            var selectedOption = cityElement.options[cityElement.selectedIndex].text
+            district=[]
+            for(var i=0;i<locations.length;i++){
+                if(locations[i].cityname==selectedOption){
+
+                    district.push(locations[i].districtname)
+                    district=new Set(district)
+                    district=Array.from(district)
+
+                    var districtElement = document.getElementById('district');
+                    while (districtElement.options.length >1) {
+                        districtElement.remove(1)
+                    }
+                    for (var j = 0; j < district.length; j++) {
+
+                        var newOption = document.createElement('option');
+                        newOption.text = district[j]
+                        newOption.value = 'district'+String(j)
+                        districtElement.appendChild(newOption);
+                    }
+                }
+            }
+            let filterData=[]
+            if(selectedOption!='全部'){
+                for(var i=0;i<jobData.length;i++){
+                    if(jobData[i].cityname.includes(selectedOption)){
+                        filterData.push(jobData[i])
+                    }
+                }
+            }
+            else{
+                filterData=jobData
+            }
+            updateTable(filterData)
+        })
+        var districtElement=document.getElementById('district')
+        districtElement.addEventListener('change',function (event) {
+            var selectedOption=districtElement.options[districtElement.selectedIndex].text
+            let filterData=[]
+            if(selectedOption!='全部'){
+                for(var i=0;i<jobData.length;i++){
+                    if(jobData[i].districtname.includes(selectedOption)){
+                        filterData.push(jobData[i])
+                    }
+                }
+            }
+            else{
+                filterData=jobData
+            }
+            updateTable(filterData)
+        })
+        // 获取表格元素
+        const tableBody = document.querySelector('#jobTable tbody');
+
+        // 渲染岗位信息到表格
+function renderJobData(data) {
+    tableBody.innerHTML = ''; // 清空表格内容
+    for(var i=0; i<data.length; i++){
+        var row = `<tr>
+            <td><a href="/jobs/${data[i].jobid}/">${data[i].jobName}</a></td>
+            <td>${data[i].tag}</td>
+            <td>${data[i].cityname}</td>
+            <td>${data[i].districtname}</td>
+            <td>${data[i].experience_need}</td>
+            <td>${data[i].edu_need}</td>
+            <td>${data[i].enterprisename}</td>
+            <td>${data[i].max_salary}</td>
+            <td>${data[i].min_salary}</td>
+            <td><a href="/uh/${jobData[i].job_hrid}/">${jobData[i].job_hrname}</td>
+            <td class="${data[i].audit_result === '通过' ? 'green' : 'red'}">${data[i].audit_result}</td>
+            <td>
+                <button onclick="deleteJob(${i})" id="delete">删除</button>
+                <button onclick="updateJob(${i})" id="shenqing">更新</button>
+            </td>
+        </tr>`;
+        tableBody.insertAdjacentHTML('beforeend', row); // 添加行到表格
+    }
+}
+
+
+        function performSearch() {
+            let filterData=[]
+    var searchKeyword = document.getElementById('searchKeyword').value; // 获取搜索关键词
+    for(var i=0;i<jobData.length;i++){
+                    if(jobData[i].jobName.includes(searchKeyword)){
+                        filterData.push(jobData[i])
+                    }
+                }
+    updateTable(filterData)
+}
+
+        // 初始渲染表格
+        renderJobData(jobData);
+
+        // 改变行业时的动作监听器
+        var Category=document.getElementById('jobCategory')
+        Category.addEventListener('change',function (event){
+            option=Category.options[Category.selectedIndex].text
+            let filterData=[]
+            if(option!='全部'){
+                for(var i=0;i<jobData.length;i++){
+                    if(jobData[i].tag.includes(option)){
+                        filterData.push(jobData[i])
+                    }
+                }
+            }
+            else{
+                filterData=jobData
+            }
+            updateTable(filterData)
+        })
+        // 表单提交事件处理函数
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // 阻止表单默认提交行为
+            const category = document.getElementById('jobCategory').value;
+            const keyword = document.getElementById('searchKeyword').value;
+
+            let filteredData = jobData;
+            if (category !== 'all') {
+                filteredData = filteredData.filter(job => job.name.toLowerCase().includes(category.toLowerCase()));
+            }
+            if (keyword.trim() !== '') {
+                filteredData = filteredData.filter(job => job.name.toLowerCase().includes(keyword.toLowerCase()));
+            }
+            renderJobData(filteredData);
+        });
+            function showForm() {
+        var form = document.getElementById("addJobForm");
+        form.style.display = "block"; // 显示表单
+    }
+
+function extractNumberFromString(str) {
+    // 使用正则表达式匹配一个或多个连续的数字
+    var regex = /\d+/g; // \d 表示一个数字，+ 表示一个或多个
+    var matches = str.match(regex); // 匹配字符串中的所有数字
+
+    // 假设我们只想要第一个匹配的数字（在这个例子中就是 123）
+    // 如果需要所有匹配的数字，则可以直接返回 matches
+    return matches ? matches[0] : null;
+}
+    function addJob() {
+        var jobName = document.getElementById("jobName").value;
+        var maxSalary = document.getElementById("maxSalary").value;
+        var minSalary = document.getElementById("minSalary").value;
+        var tag = document.getElementById("tag2").value;
+        var inputCity = document.getElementById('city2');
+        var city = inputCity.value;
+        var experience = document.getElementById("experience").value;
+
+        var selectElement = document.getElementById('education');
+        var selectedOption = selectElement.options[selectElement.selectedIndex];
+        var selectedValue = selectedOption.value;
+        var selectedText = selectedOption.text;
+        var education =selectedText
+
+        var description = document.getElementById("description").value;
+        var district = document.getElementById("district2").value;
+        selectElement = document.getElementById('HrId');
+        selectedOption = selectElement.options[selectElement.selectedIndex];
+        selectedValue = selectedOption.value; // 这将是 job_hrid
+        selectedText = selectedOption.text; // 这将是 job_hrname 和 job_hrid 的组合文本
+        var hrid=extractNumberFromString(selectedText)
+
+        console.log(city,experience,district)
+        // 在这里可以进行表单验证
+
+        // 创建一个对象存储新增的岗位信息
+        let data = {
+            label:'create',
+            jobName: jobName,
+            maxSalary: maxSalary,
+            minSalary: minSalary,
+            tag: tag,
+            city: city,
+            experience: experience,
+            education: education,
+            description: description,
+            district: district,
+            hrid:hrid
+        };
+
+        // 这里可以将新增的岗位信息发送到后端保存
+            fetch('', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // 解析JSON响应
+                return response.json();
+            })
+            .then(data => {
+                // 处理后端返回的JSON数据
+                if (data.hasOwnProperty('error')) {
+                    // 如果后端返回了错误消息，说明保存失败
+                    alert('失败: ' + data.error);
+                } else {
+                    // 否则，保存成功
+                    alert('成功！');
+history.go(0);
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+                alert("添加失败，请确保城市名最后没有“市“，市辖区名最后没有”区“")
+                // 这里可以根据实际情况处理错误
+            });
+
+    }
+var jobid=0
+        function deleteJob(index) {
+                let jobid=jobData[index].jobid
+            let data = {
+            label:'delete',
+                    jobid:jobid,
+
+        };
+
+        // 这里可以将新增的岗位信息发送到后端保存
+            fetch('', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // 解析JSON响应
+                return response.json();
+            })
+            .then(data => {
+                // 处理后端返回的JSON数据
+                if (data.hasOwnProperty('error')) {
+                    // 如果后端返回了错误消息，说明保存失败
+                    alert('失败: ' + data.error);
+                } else {
+                    // 否则，保存成功
+                    alert('成功！');
+                    history.go(0);
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+                // 这里可以根据实际情况处理错误
+            });
+
+
+        }
+
+        function updateJob(index) {
+        var rowData = jobData[index];
+        jobid=rowData.jobid
+        // 将选定行的数据填充到更新表单字段中
+        document.getElementById('updateJobName').value = rowData.jobName;
+        document.getElementById('updateMaxSalary').value = rowData.max_salary;
+        document.getElementById('updateMinSalary').value = rowData.min_salary;
+        document.getElementById('updateTag').value=rowData.tag;
+        // 填充其他字段
+
+        // 显示更新表单
+        showUpdateForm();
+    }
+    function updateJob1(){
+
+        var jobName = document.getElementById("updateJobName").value;
+        var maxSalary = document.getElementById("updateMaxSalary").value;
+        var minSalary = document.getElementById("updateMinSalary").value;
+        var tag = document.getElementById("updateTag").value;
+        var city = document.getElementById("updateCity").value;
+        var experience = document.getElementById("updateExperience").value;
+
+        var selectElement = document.getElementById('updateEducation');
+        var selectedOption = selectElement.options[selectElement.selectedIndex];
+        var selectedValue = selectedOption.value;
+        var selectedText = selectedOption.text;
+        var education =selectedText
+
+
+        var description = document.getElementById("updateDescription").value;
+        var district = document.getElementById("updateDistrict").value;
+        selectElement = document.getElementById('updateHrId');
+        selectedOption = selectElement.options[selectElement.selectedIndex];
+        selectedValue = selectedOption.value; // 这将是 job_hrid
+        selectedText = selectedOption.text; // 这将是 job_hrname 和 job_hrid 的组合文本
+        var hrid=extractNumberFromString(selectedText)
+
+                let data = {
+            label:'update',
+                    jobid:jobid,
+            jobName: jobName,
+            maxSalary: maxSalary,
+            minSalary: minSalary,
+            tag: tag,
+            city: city,
+            experience: experience,
+            education: education,
+            description: description,
+            district: district,
+            hrid:hrid
+        };
+
+        // 这里可以将新增的岗位信息发送到后端保存
+            fetch('', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // 解析JSON响应
+                return response.json();
+            })
+            .then(data => {
+                // 处理后端返回的JSON数据
+                if (data.hasOwnProperty('error')) {
+                    // 如果后端返回了错误消息，说明保存失败
+                    alert('失败: ' + data.error);
+                } else {
+                    // 否则，保存成功
+                    alert('成功！');
+history.go(0);
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+                // 这里可以根据实际情况处理错误
+            });
+
+    }
+function closeUpdateForm() {
+            var updateForm = document.getElementById('updateJobForm');
+            updateForm.classList.add('hidden');
+        }
+    function showUpdateForm() {
+        var updateForm = document.getElementById('updateJobForm');
+        updateForm.classList.remove('hidden');
+        // 可以添加额外的样式或 JavaScript 代码将表单居中显示在屏幕上
+    }
+
+         function toggleUserMenu() {
+        var menu = document.getElementById("userMenu");
+        if (menu.style.display === "none") {
+            menu.style.display = "block";
+        } else {
+            menu.style.display = "none";
+        }
+    }
+     function filterCities() {
+        var input, filter, datalist, options, option;
+        input = document.getElementById("city2");
+        filter = input.value.toUpperCase();
+        datalist = document.getElementById("city-options");
+        options = datalist.getElementsByTagName("option");
+        for (var i = 0; i < options.length; i++) {
+            option = options[i].value;
+            if (option.value.toUpperCase().indexOf(filter) > -1) {
+                option.style.display = "";
+            } else {
+                option.style.display = "none";
+            }
+        }
+    }
+
+    // 调用函数
+    document.getElementById("city2").addEventListener("input", filterCities);
+            document.getElementById("updateCity").addEventListener("input", filterCities);
+    </script>
+</body>
+</html>

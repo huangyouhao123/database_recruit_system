@@ -1,0 +1,221 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>求职招聘系统 - 登录页面</title> <!-- 添加标题：求职招聘系统 -->
+    <style>
+/* Shared Styles */
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url({% static 'img/backg.png' %});
+    background-size: cover; /* 让背景图片充满整个屏幕 */
+    background-repeat: no-repeat; /* 防止背景图片重复 */
+    margin: 0;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* 添加半透明背景色 */
+    border-radius: 10px; /* 添加圆角边框 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+}
+
+/* Header Styles */
+
+h1#main_title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px; /* 调整标题与表单之间的间距 */
+}
+
+/* Form Styles */
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555; /* 调整标签的文字颜色 */
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s; /* 添加过渡效果 */
+}
+
+.form-group input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s; /* 添加过渡效果 */
+}
+
+.form-group input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Register Link Styles */
+
+.register-link {
+    margin-top: 10px;
+    text-align: center;
+    color: #007bff;
+}
+
+.register-link a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s; /* 添加过渡效果 */
+}
+
+.register-link a:hover {
+    color: #0056b3; /* 调整鼠标悬停时的文字颜色 */
+    text-decoration: underline;
+}
+
+        body {
+
+            font-family: Arial, sans-serif;
+            background-image: url({% static 'img/backg.png' %});
+            background-size: cover; /* 让背景图片充满整个屏幕 */
+            background-repeat: no-repeat; /* 防止背景图片重复 */
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input,
+        .form-group select { /* 给 select 元素应用样式 */
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .form-group input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        .form-group input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        /* 添加注册选项的样式 */
+        .register-link {
+            margin-top: 10px;
+            text-align: center;
+        }
+        .register-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="main_title">求职招聘系统</h1>
+{#        <img src="{% static 'img/user.jpg' %}" alt="no" id="userMenuButton" class="small-image" onclick="toggleUserMenu()" style="position: absolute; right: 50px; top: 10px;">#}
+        <h2>登录页面</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="role">角色:</label>
+                <select id="role" name="role" required>
+                    <option value="ruser">求职者</option>
+                    <option value="company">企业</option>
+                    <option value="hr">HR</option>
+                    <option value="auditor">审核员</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="username">用户账号:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">密码:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="登录">
+            </div>
+            <!-- 注册选项 -->
+            <div class="register-link">
+                还没有账号？<a href="/user/register/">立即注册</a>
+            </div>
+        </form>
+        <div class="notice">
+       <p style="text-align: center; font-size: 12px;">温馨提示：如有问题可以咨询管理员：137xxxxxxxx</p>
+    </div>
+    </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault(); // 阻止表单默认提交行为
+
+        const formData = new FormData(form);
+        fetch('', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}' // 如果使用 CSRF 防护，请确保在请求头中包含 CSRF 令牌
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert('登录成功'); // 或者执行其他成功登录后的操作
+                let role=document.getElementById('role')
+                let r=role.options[role.selectedIndex].text
+                if(r=='求职者'){
+                    window.location.href = "ur/";
+                }
+                if(r=='企业'){
+                    window.location.href = "ue/";
+                }
+                if(r=='HR'){
+                    window.location.href = "uh/";
+                }
+                if(r=='审核员'){
+                    window.location.href = "ua/";
+                }
+            } else {
+                alert('登录失败，请检查用户名和密码'); // 或者执行其他登录失败后的操作
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+});
+
+</script>
+</body>
+</html>

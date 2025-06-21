@@ -1,0 +1,465 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR用户</title>
+    <style>
+   body {
+            font-family: Arial, sans-serif;
+            background-image: url({% static 'img/bk2.png' %});
+            background-size: cover; /* 让背景图片充满整个屏幕 */
+            background-repeat: no-repeat; /* 防止背景图片重复 */
+        }
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.image-upload-label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+}
+
+.image-upload-label img {
+    max-width: 50%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.image-upload-label span {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: none;
+}
+
+.image-upload-label:hover span {
+    display: block;
+}
+
+/* 隐藏 input[type="file"] */
+input[type="file"] {
+    display: none;
+}
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .info-item {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            pointer-events: none; /* 默认状态下禁止点击 */
+        }
+        select#education {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            pointer-events: none; /* 默认状态下禁止点击 */
+            appearance: none; /* 去除默认样式 */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); /* 使用自定义下拉箭头 */
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+        }
+
+        img {
+            max-width: 50%;
+            height: auto;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .edit-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .save-button {
+            background-color: #28a745;
+        }
+
+        .cancel-button {
+            background-color: #dc3545;
+        }
+
+
+        /* 添加样式用于装饰 */
+        .decoration {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+        .centered-form {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+        }
+
+        .centered-form h2 {
+            margin-top: 0;
+            text-align: center;
+            color: #333;
+        }
+
+        .centered-form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .centered-form input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .centered-form .edit-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .centered-form .edit-button.cancel-button {
+            background-color: #dc3545;
+        }
+
+        .centered-form .edit-button.confirm-button {
+            background-color: #28a745;
+        }
+    </style>
+    <script>
+    var csrfToken = "{{ csrf_token }}";
+</script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>HR信息</h1>
+        <div class="image-container">
+    <label for="file-upload" class="image-upload-label">
+        <img class="resized-image" src="data:image/png;base64,{{ image_data }}" alt="Resized Image">
+    </label>
+    <input type="file" id="file-upload" style="display: none;">
+</div>
+
+        <div class="info-item">
+            <label for="user-id">HR用户号:</label>
+            <input type="text" id="user-id" readonly>
+        </div>
+        <div class="info-item">
+            <label for="phone">手机号:</label>
+            <input type="text" id="phone" readonly>
+        </div>
+        <div class="info-item">
+            <label for="name">姓名:</label>
+            <input type="text" id="name" readonly>
+        </div>
+        <div class="info-item">
+            <label for="enterpriseid">所在企业号:</label>
+            <input type="text" id="enterpriseid" readonly>
+        </div>
+        <div class="info-item">
+            <label for="enterprise">所在企业:</label>
+            <input type="text" id="enterprise" readonly>
+        </div>
+        {% csrf_token %}
+
+        </div>
+
+
+        <!-- 装饰 -->
+        <div class="decoration"></div>
+    </div>
+
+    <script>
+        let blank=document.getElementById('user-id')
+        blank.value='{{ userid }}'
+        blank=document.getElementById('phone')
+        blank.value='{{ telephone }}'
+        blank=document.getElementById('name')
+        blank.value='{{ name }}'
+        blank=document.getElementById('enterpriseid')
+        blank.value='{{ enterpriseid }}'
+        blank=document.getElementById('enterprise')
+        blank.value='{{ enterprisename }}'
+
+        function enableEditing() {
+    // 将所有输入框的 pointer-events 属性设为 auto，使其可点击
+            var inputs = document.querySelectorAll('input[type="text"]');
+            for (var i = 1; i < inputs.length; i++) {
+                inputs[i].removeAttribute('readonly');
+                inputs[i].style.pointerEvents = 'auto';
+            }
+
+            // 隐藏编辑按钮，显示保存和取消按钮
+            document.querySelector('.edit-button').style.display = 'none';
+            document.querySelector('.save-button').style.display = 'inline-block';
+            document.querySelector('.cancel-button').style.display = 'inline-block';
+        }
+document.getElementById('file-upload').addEventListener('change', function(event) {
+    var file = event.target.files[0];
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+        var imageSrc = e.target.result;
+        document.querySelector('.resized-image').src = imageSrc;
+
+        // 将图片转换为 Base64 编码
+        var base64Image = imageSrc.split(',')[1]; // 去掉 data:image/jpeg;base64, 前缀
+
+        // 发送 Base64 编码的图片数据给后端
+        sendBase64ImageToBackend(base64Image);
+    };
+
+    reader.readAsDataURL(file);
+});
+
+function sendBase64ImageToBackend(base64Image) {
+    // 构造要发送的数据对象
+    var data = {
+        label:'photo',
+        image_data: base64Image
+    };
+
+    // 发送 AJAX 请求到后端
+    fetch('', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken // 根据实际情况填写CSRF Token
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        // 解析 JSON 响应
+        return response.json();
+    })
+    .then(data => {
+        // 处理后端返回的 JSON 数据
+        console.log('Image uploaded successfully:', data);
+    })
+    .catch(error => {
+        console.error('There was a problem with your fetch operation:', error);
+        // 这里可以根据实际情况处理错误
+    });
+}
+
+
+        function saveChanges() {
+    // 收集用户信息
+    var userId = document.getElementById('user-id').value;
+    var phone = document.getElementById('phone').value;
+    var name = document.getElementById('name').value;
+    var enterpriseid=document.getElementById('enterpriseid').value;
+    var enterprise=document.getElementById('enterprise').value;
+
+    // 构造要发送的数据对象
+    var data = {
+        label:'data',
+        userId: userId,
+        phone: phone,
+        name: name,
+        enterpriseid:enterpriseid,
+        enterprise:enterprise
+    };
+    var currentUrl = window.location.href;
+    // 发送POST请求到后端
+    fetch(currentUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        // 解析JSON响应
+        return response.json();
+    })
+    .then(data => {
+        // 处理后端返回的JSON数据
+        if (data.hasOwnProperty('error')) {
+            window.location.reload();
+            // 如果后端返回了错误消息，说明操作失败
+            alert('信息更新错误:', data.error);
+            // 在这里可以将前端更改的信息恢复，例如重新加载页面
+
+        } else {
+            // 否则，操作成功
+            alert('信息更新成功');
+            // 这里你可以根据实际情况进行页面重定向或其他操作
+            cancelChanges();
+        }
+    })
+    .catch(error => {
+        console.error('There was a problem with your fetch operation:', error);
+        // 这里可以根据实际情况处理错误
+    });
+}
+
+        function cancelChanges() {
+            // 将所有输入框的 pointer-events 属性设为 none，使其不可点击
+            var inputs = document.querySelectorAll('input[type="text"]');
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].setAttribute('readonly', 'readonly');
+                inputs[i].style.pointerEvents = 'none';
+            }
+
+            // 隐藏保存和取消按钮，显示编辑按钮
+            document.querySelector('.edit-button').style.display = 'inline-block';
+            document.querySelector('.save-button').style.display = 'none';
+            document.querySelector('.cancel-button').style.display = 'none';
+        }
+
+
+
+        function goBack() {
+    // 返回到显示用户信息的页面
+    window.location.href = ''; // 替换 '/user_info_url' 为你的用户信息页面的 URL
+}
+ function showChangePassword() {
+            document.getElementById('change-password').style.display = 'block';
+        }
+
+        function cancelChangePassword() {
+            document.getElementById('change-password').style.display = 'none';
+        }
+
+        function changePassword() {
+            var currentPassword = document.getElementById('current-password').value;
+            var newPassword = document.getElementById('new-password').value;
+            var confirmPassword = document.getElementById('confirm-password').value;
+
+            // 检查密码是否为空
+            if (currentPassword === '' || newPassword === '' || confirmPassword === '') {
+                alert('密码不能为空');
+                return;
+            }
+
+            // 检查新密码和确认密码是否一致
+            if (newPassword !== confirmPassword) {
+                alert('新密码和确认密码不一致');
+                return;
+            }
+
+            // 构造要发送的数据对象
+            var data = {
+                label:'changePassword',
+                currentPassword: currentPassword,
+                newPassword: newPassword
+            };
+
+            // 发送POST请求到后端
+            fetch('', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // 解析JSON响应
+                return response.json();
+            })
+            .then(data => {
+                // 处理后端返回的JSON数据
+                if (data.hasOwnProperty('error')) {
+                    // 如果后端返回了错误消息，说明保存失败
+                    alert('修改密码失败: ' + data.error);
+                } else {
+                    // 否则，保存成功
+                    alert('密码修改成功！');
+                    // 清空输入框
+                    document.getElementById('current-password').value = '';
+                    document.getElementById('new-password').value = '';
+                    document.getElementById('confirm-password').value = '';
+                    // 隐藏修改密码页面
+                    cancelChangePassword();
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+                // 这里可以根据实际情况处理错误
+            });
+        }
+        function redirectToJobs() {
+    // 跳转到寻找工作页面
+    window.location.href = '/choose/';
+}
+function redirectToInterviewResults() {
+        // 跳转到面试结果页面
+        window.location.href = '/interview/';
+    }
+    </script>
+</body>
+</html>

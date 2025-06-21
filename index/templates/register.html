@@ -1,0 +1,249 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <style>
+        /* Shared Styles */
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url({% static 'img/backg.png' %});
+    background-size: cover; /* 让背景图片充满整个屏幕 */
+    background-repeat: no-repeat; /* 防止背景图片重复 */
+    margin: 0;
+}
+
+.registration-form {
+    max-width: 400px;
+    margin: 20px auto; /* 增加整体表单的垂直间距 */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* 添加半透明背景色 */
+    border-radius: 10px; /* 添加圆角边框 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px; /* 调整标签与输入框的垂直间距 */
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group button {
+    width: 100%; /* 让按钮宽度与父元素相同 */
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* 添加过渡效果 */
+}
+
+.form-group button:hover {
+    background-color: #0056b3; /* 调整鼠标悬停时的背景色 */
+}
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url({% static 'img/backg.png' %});
+            background-size: cover; /* 让背景图片充满整个屏幕 */
+            background-repeat: no-repeat; /* 防止背景图片重复 */
+        }
+                #user-id {
+            margin-top: 20px;
+            font-weight: bold;
+            color: green;
+        }
+        .registration-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+        <script>
+    var csrfToken = "{{ csrf_token }}";
+</script>
+</head>
+<body>
+    <div class="registration-form">
+        <h2>注册</h2>
+        <div class="form-group">
+            <label for="identity">选择注册身份：</label>
+            <select id="identity" onchange="showRegistrationForm()">
+                <option value="user">用户</option>
+                <option value="company">企业</option>
+                <option value="hr">HR用户</option>
+            </select>
+        </div>
+        <form id="userRegistrationForm" style="display: block;">
+            <div class="form-group">
+                <label for="username">姓名：</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">密码：</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="register()">注册</button>
+            </div>
+        </form>
+        <form id="companyRegistrationForm" style="display: none;">
+            <div class="form-group">
+                <label for="companyName">企业名称：</label>
+                <input type="text" id="companyName" name="companyName" required>
+            </div>
+            <div class="form-group">
+                <label for="companyType">企业类型：(民营/国营/外资)</label>
+                <input type="text" id="companyType" name="companyType" required>
+            </div>
+            <div class="form-group">
+                <label for="companyPassword">密码：</label>
+                <input type="password" id="companyPassword" name="companyPassword" required>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="register()">注册</button>
+            </div>
+        </form>
+        <form id="hrRegistrationForm" style="display: none;">
+            <div class="form-group">
+                <label for="hrName">姓名：</label>
+                <input type="text" id="hrName" name="hrName" required>
+            </div>
+            <div class="form-group">
+                <label for="hrPassword">密码：</label>
+                <input type="password" id="hrPassword" name="hrPassword" required>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="register()">注册</button>
+            </div>
+        </form>
+        <div id="user-id"></div>
+    </div>
+
+    <script>
+        function showRegistrationForm() {
+            var identity = document.getElementById("identity").value;
+            if (identity === "user") {
+                document.getElementById("userRegistrationForm").style.display = "block";
+                document.getElementById("companyRegistrationForm").style.display = "none";
+                document.getElementById("hrRegistrationForm").style.display = "none";
+            } else if (identity === "company") {
+                document.getElementById("userRegistrationForm").style.display = "none";
+                document.getElementById("companyRegistrationForm").style.display = "block";
+                document.getElementById("hrRegistrationForm").style.display = "none";
+            } else if (identity === "hr") {
+                document.getElementById("userRegistrationForm").style.display = "none";
+                document.getElementById("companyRegistrationForm").style.display = "none";
+                document.getElementById("hrRegistrationForm").style.display = "block";
+            }
+        }
+
+        function register(){
+            var identity = document.getElementById("identity").value;
+            var username, password;
+            var type
+            // 根据不同的身份获取不同的用户名和密码
+            if (identity === "user") {
+                username = document.getElementById("username").value;
+                password = document.getElementById("password").value;
+            } else if (identity === "company") {
+                username = document.getElementById("companyName").value;
+                type=document.getElementById('companyType').value
+                password = document.getElementById("companyPassword").value;
+            } else if (identity === "hr") {
+                username = document.getElementById("hrName").value;
+                password = document.getElementById("hrPassword").value;
+            }
+
+            var data = {
+                label: 'register',
+                identity: identity,
+                username: username,
+                password: password,
+                type:type
+            };
+
+            // 发送POST请求到后端
+            fetch(window.location.href, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken // 根据你的页面中实际的CSRF Token变量名填写
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // 解析JSON响应
+                return response.json();
+            })
+            .then(data => {
+                // 处理后端返回的JSON数据
+                if (data.hasOwnProperty('error')) {
+                    // 如果后端返回了错误消息，说明保存失败
+                    alert('注册失败: ' + data.error);
+                } else {
+                    // 否则，保存成功
+                    id=data.userid
+                    alert('注册成功');
+                    displayUserId('账号:'+id)
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+                // 这里可以根据实际情况处理错误
+            });
+        }
+        function displayUserId(userId) {
+            // 获取用于显示用户 ID 的 div 元素
+            var userIdDiv = document.getElementById("user-id");
+            // 将用户 ID 设置为 div 元素的文本内容
+            userIdDiv.textContent = userId;
+        }
+    </script>
+</body>
+</html>

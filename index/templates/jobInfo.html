@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>岗位信息</title>
+    <style>
+.job-info {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.label {
+    width: 120px;
+    font-weight: bold;
+    color: #555;
+}
+
+.value {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.description {
+    margin-top: 20px;
+}
+
+.description-text {
+    white-space: pre-line;
+}
+
+.container {
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            background-image: url({% static 'img/bk3.png' %});
+            background-size: cover; /* 让背景图片充满整个屏幕 */
+            background-repeat: no-repeat; /* 防止背景图片重复 */
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .job-info {
+            margin-bottom: 20px;
+        }
+        .label {
+            font-weight: bold;
+            color: #555;
+        }
+        .value {
+            margin-left: 10px;
+        }
+        .description {
+            margin-top: 20px;
+        }
+        .description-text {
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>岗位信息</h1>
+        <div class="job-info">
+            <span class="label">岗位号:</span>
+            <span class="value">{{ job.jobid }}</span>
+        </div>
+        <div class="job-info">
+            <span class="label">岗位名:</span>
+            <span class="value">{{ job.jobname }}</span>
+        </div>
+        <div class="job-info">
+            <span class="label">最低薪资:</span>
+            <span class="value">{{ job.min_salary }}</span>
+        </div>
+        <div class="job-info">
+            <span class="label">最高薪资</span>
+            <span class="value">{{ job.max_salary }}</span>
+        </div>
+        <div class="job-info">
+            <span class="label">标签:</span>
+            <span class="value">{{ job.tag }}</span>
+        </div>
+        <div class="job-info">
+            <span class="label">工作城市号:</span>
+            <span class="value">{{ job.cityid }}</span>
+        </div>
+        <div class="job-info">
+            <span class="label">工作经历需求:</span>
+            <span class="value">{{ job.experience_need }}</span>
+        </div>
+        <div class="job-info">
+            <span class="label">学历需求:</span>
+            <span class="value">{{ job.edu_need }}</span>
+        </div>
+        <div class="job-info">
+            <span class="label">企业号:</span>
+            <span class="value">{{ job.enterpriseid }}</span>
+        </div>
+        <div class="job-info">
+            <span class="label">市辖区号:</span>
+            <span class="value">{{ job.districtid }}</span>
+        </div>
+        <div class="job-info">
+            <span class="label">创建时间:</span>
+            <span class="value">{{ job.createtime }}</span>
+        </div>
+        <div class="job-info">
+            <span class="label">HR号:</span>
+            <span class="value">{{ job.HRid }}</span>
+        </div>
+        <div class="job-info">
+            <span class="label">审核号:</span>
+            <span class="value">{{ job.auditorid }}</span>
+        </div>
+        <div class="job-info">
+            <span class="label">审批结果:</span>
+            <span class="value">{{ job.auditresult }}</span>
+        </div>
+        <div class="job-info">
+            <span class="label">原因:</span>
+            <span class="value">{{ job.reason }}</span>
+        </div>
+        <div class="description">
+            <span class="label">职位描述:</span>
+            <div class="description-text">
+                {{ job.job_discription }}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
